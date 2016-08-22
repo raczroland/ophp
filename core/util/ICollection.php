@@ -4,7 +4,7 @@ namespace core\util;
 
 use core\defaults\Object;
 
-interface Collection //extends \IteratorAggregate
+interface ICollection //extends \IteratorAggregate
 {
 
     public function size(): int;
@@ -21,15 +21,15 @@ interface Collection //extends \IteratorAggregate
 
     public function remove(Object $o): bool;
 
-    public function containsAll(Collection $c): bool;
+    public function containsAll(ICollection $c): bool;
 
-    public function addAll(Collection $c): bool;
+    public function addAll(ICollection $c): bool;
 
-    public function removeAll(Collection $c): bool;
+    public function removeAll(ICollection $c): bool;
 
     //public function removeIf(Predicate $filter): bool;
 
-    public function retainAll(Collection $c): bool;
+    public function retainAll(ICollection $c): bool;
 
     public function clear();
 

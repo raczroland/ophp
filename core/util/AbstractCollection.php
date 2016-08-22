@@ -8,7 +8,7 @@ use core\exceptions\UnsupportedOperationException;
 use IteratorAggregate;
 use Traversable;
 
-class AbstractCollection implements Collection, IteratorAggregate
+abstract class AbstractCollection implements ICollection, IteratorAggregate
 {
 
     protected function __construct()
@@ -27,7 +27,7 @@ class AbstractCollection implements Collection, IteratorAggregate
         $it = $this->getIterator();
         if (is_null($o)) {
             return false;
-            //TODO
+            //TODO ?
         } else {
             while ($it->valid()) {
                 if ($o->equals($it->current())) {
@@ -57,37 +57,77 @@ class AbstractCollection implements Collection, IteratorAggregate
 
     public function remove(Object $o): bool
     {
-        // TODO: Implement remove() method.
+        $it = $this->getIterator();
+        if (is_null($o)) {
+            return false;
+            //TODO ?
+        } else {
+            while ($it->valid()) {
+                if ($o->equals($it->current())) {
+                    $it->remove();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    public function containsAll(Collection $c): bool
+    public function containsAll(ICollection $c): bool
     {
-        // TODO: Implement containsAll() method.
+        foreach ($c as $e) {
+            if (!$this->contains($e)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    public function addAll(Collection $c): bool
+    public function addAll(ICollection $c): bool
     {
-        // TODO: Implement addAll() method.
+        $modified = false;
+        foreach ($c as $e) {
+            if ($this->add($e)) {
+                $modified = true;
+            }
+        }
+        return $modified;
     }
 
-    public function removeAll(Collection $c): bool
+    public function removeAll(ICollection $c): bool
     {
-        // TODO: Implement removeAll() method.
+        $modified = false;
+        $it = $this->getIterator();
+        while ($it->valid()) {
+            if ($c->contains($it->current())) {
+                $it->remove();
+                $modified = true;
+            }
+            $it->next();
+        }
+        return $modified;
     }
 
-    public function retainAll(Collection $c): bool
+    public function retainAll(ICollection $c): bool
     {
-        // TODO: Implement retainAll() method.
+        $modified = false;
+        $it = $this->getIterator();
+        while ($it->valid()) {
+            if (!$c->contains($it->current())) {
+                $it->remove();
+                $modified = true;
+            }
+            $it->next();
+        }
+        return $modified;
     }
 
     public function clear()
     {
-        // TODO: Implement clear() method.
-    }
-
-    public function equals(Object $o): bool
-    {
-        // TODO: Implement equals() method.
+        $it = $this->getIterator();
+        while ($it->valid()) {
+            $it->remove();
+            $it->next();
+        }
     }
 
     /**
@@ -97,8 +137,24 @@ class AbstractCollection implements Collection, IteratorAggregate
      * <b>Traversable</b>
      * @since 5.0.0
      */
-    public function getIterator(): Traversable
+    public abstract function getIterator(): Traversable;
+
+    public function __toString()
     {
-        // TODO: Implement getIterator() method.
+        $it = $this->getIterator();
+        if (!$it->valid()) {
+            return "[]";
+        }
+        $str = "[";
+        for (;;) {
+            $e = $it->current();
+            $str .= ($e == $this ? "(this ICollection)" : $e);
+            $it->next();
+            if (!$it->valid()) {
+                return $str . ']';
+            }
+            $str .= ', ';
+        }
     }
+
 }
