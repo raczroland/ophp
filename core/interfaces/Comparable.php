@@ -1,5 +1,9 @@
 <?php
 
+namespace core\interfaces;
+
+use core\defaults\Object;
+
 interface Comparable
 {
 

@@ -1,5 +1,7 @@
 <?php
 
+namespace core\defaults;
+
 class Object
 {
 
@@ -13,12 +15,12 @@ class Object
         return clone $this;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return $this->getClass()->getName() . '@';
     }
 
-    public function equals(Object $obj): boolean
+    public function equals(Object $obj): bool
     {
         return ($this == $obj);
     }

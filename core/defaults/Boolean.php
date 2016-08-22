@@ -1,16 +1,19 @@
 <?php
 
+namespace core\defaults;
+
 use core\exceptions\WrongParameterException;
+use core\interfaces\Comparable;
+use core\defaults;
+
 
 class Boolean extends Object implements Comparable
 {
 
+    /**
+     * @var boolean
+     */
     private $value;
-
-    public function compareTo(Object $obj): Comparable
-    {
-
-    }
 
     public function __construct($value)
     {
@@ -36,12 +39,12 @@ class Boolean extends Object implements Comparable
         return new self(false);
     }
 
-    public static function parseBoolean(string $s): boolean
+    public static function parseBoolean(string $s): bool
     {
         return self::toBoolean($s);
     }
 
-    public function booleanValue(): boolean
+    public function booleanValue(): bool
     {
         return $this->value;
     }
@@ -56,7 +59,7 @@ class Boolean extends Object implements Comparable
         return $this->value ? 1231 : 1237;
     }
 
-    public function equals(Object $obj): boolean
+    public function equals(Object $obj): bool
     {
         if ($obj instanceof Boolean) {
             return $this->value == $obj->booleanValue();
@@ -64,14 +67,23 @@ class Boolean extends Object implements Comparable
         return false;
     }
 
-    private static function toBoolean(string $name): boolean
+    private static function toBoolean(string $name): bool
     {
         return (($name != null) && strtolower($name) == 'true');
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return $this->value ? 'true' : 'false';
+    }
+
+    public function compareTo(Object $obj): Comparable
+    {
+        if ($obj instanceof Boolean) {
+            return ($obj->value == $this->value ? 0 : ($this->value ? 1 : -1));
+        } else {
+            throw new WrongParameterException();
+        }
     }
 
 }
