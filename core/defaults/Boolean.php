@@ -2,6 +2,7 @@
 
 namespace core\defaults;
 
+use core\exceptions\NullPointerException;
 use core\exceptions\WrongParameterException;
 use core\interfaces\Comparable;
 use core\defaults;
@@ -79,6 +80,9 @@ class Boolean extends Object implements Comparable
 
     public function compareTo(Object $obj): Comparable
     {
+        if (is_null($obj)) {
+            throw new NullPointerException();
+        }
         if ($obj instanceof Boolean) {
             return ($obj->value == $this->value ? 0 : ($this->value ? 1 : -1));
         } else {
