@@ -28,6 +28,7 @@ class Object
     public function hashCode(): int
     {
         return 0;
+        //TODO
     }
 
 }
