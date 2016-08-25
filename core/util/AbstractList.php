@@ -2,7 +2,7 @@
 
 namespace core\util;
 
-use core\defaults\Object;
+use core\lang\Object;
 use core\exceptions\IndexOutOfBoundsException;
 use core\exceptions\UnsupportedOperationException;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace core\defaults;
+namespace core\lang;
 
 use core\exceptions\NullPointerException;
 use core\exceptions\WrongParameterException;
 use core\interfaces\Comparable;
-use core\defaults;
+use core\lang;
 
 
 class Boolean extends Object implements Comparable

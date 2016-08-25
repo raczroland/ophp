@@ -1,5 +1,5 @@
 <?php
-namespace core\defaults;
+namespace core\lang;
 
 
 interface INumber

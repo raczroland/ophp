@@ -3,7 +3,7 @@
 namespace core\util;
 
 
-use core\defaults\Object;
+use core\lang\Object;
 use core\exceptions\UnsupportedOperationException;
 use IteratorAggregate;
 use Traversable;

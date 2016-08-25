@@ -1,6 +1,6 @@
 <?php
 
-namespace core\defaults;
+namespace core\lang;
 
 
 use core\exceptions\BaseException;

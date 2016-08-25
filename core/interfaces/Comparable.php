@@ -2,7 +2,7 @@
 
 namespace core\interfaces;
 
-use core\defaults\Object;
+use core\lang\Object;
 
 interface Comparable
 {

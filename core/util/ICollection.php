@@ -2,7 +2,7 @@
 
 namespace core\util;
 
-use core\defaults\Object;
+use core\lang\Object;
 
 interface ICollection //extends \IteratorAggregate
 {

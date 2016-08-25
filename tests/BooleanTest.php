@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '/../otphp.php';
 
 use core\defaults\Boolean;
 use core\exceptions;
+use core\lang\CFloat;
 
 class BooleanTest extends \PHPUnit_Framework_TestCase
 {

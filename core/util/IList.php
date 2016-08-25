@@ -2,7 +2,7 @@
 
 namespace core\util;
 
-use core\defaults\Object;
+use core\lang\Object;
 
 
 interface IList extends ICollection
